@@ -2,7 +2,8 @@
 # VVV Install script
 
 # Rubygems update
-if [ $(gem -v|grep '^2.') ]; then
+command_exist="$(which gem)"
+if [ -z "${command_exist}" ]; then
 	echo "gem installed"
 else
 	apt-get install -y ruby-dev
