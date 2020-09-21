@@ -6,7 +6,7 @@ command_exist="$(which gem)"
 if [ -z "${command_exist}" ]; then
 	echo "gem installed"
 else
-	apt-get install -y ruby-dev
+	apt-get install -y ruby2.6-dev
 	echo "ruby-dev installed"
 	echo "gem not installed"
 	gem install rubygems-update
