@@ -11,18 +11,11 @@ else
     gem install rubygems-update
 fi
 
-# wordmove install
-if ! gem spec wordmove > /dev/null 2>&1; then
-    noroot gem install wordmove
-else
+# wordmove install/update
+if $(gem list wordmove -i); then
+    echo "updating wordmove"
     noroot gem update wordmove
-fi
-
-wordmove_path="$(gem which wordmove | sed -s 's/.rb/\/deployer\/base.rb/')"
-if [  "$(grep yaml $wordmove_path)" ]; then
-    echo "can require yaml"
 else
-    echo "set require yaml"
-    sed -i "7i require\ \'yaml\'" $wordmove_path
-    echo "can require yaml"
+    echo "installing wordmove"
+    noroot gem install wordmove
 fi
