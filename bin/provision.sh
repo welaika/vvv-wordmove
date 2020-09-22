@@ -3,7 +3,7 @@
 
 # Install ruby 2.7
 if [ $(command -v gem) ]; then
-	echo "gem installed"
+    echo "gem installed"
 else
     echo "ruby-dev & gem package installing..."
     apt remove ruby* -y
@@ -12,7 +12,11 @@ else
 fi
 
 # wordmove install
-gem update wordmove
+if ! gem spec wordmove > /dev/null 2>&1; then
+    gem install wordmove
+else
+    gem update wordmove
+fi
 
 wordmove_path="$(gem which wordmove | sed -s 's/.rb/\/deployer\/base.rb/')"
 if [  "$(grep yaml $wordmove_path)" ]; then
