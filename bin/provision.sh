@@ -1,15 +1,14 @@
 #!/bin/bash
 # VVV Install script
 
-# Rubygems update
-command_exist="$(which gem)"
-if [ -z "${command_exist}" ]; then
+# Install ruby 2.7
+if [ $(command -v gem) ]; then
 	echo "gem installed"
 else
         echo "ruby-dev & gem package installing..."
+	apt remove ruby* -y
 	snap install ruby --classic
 	gem install rubygems-update
-	update_rubygems
 fi
 
 # wordmove install
