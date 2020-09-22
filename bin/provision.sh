@@ -13,9 +13,9 @@ fi
 
 # wordmove install
 if ! gem spec wordmove > /dev/null 2>&1; then
-    gem install wordmove
+    noroot gem install wordmove
 else
-    gem update wordmove
+    noroot gem update wordmove
 fi
 
 wordmove_path="$(gem which wordmove | sed -s 's/.rb/\/deployer\/base.rb/')"
