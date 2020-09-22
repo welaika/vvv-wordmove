@@ -16,6 +16,7 @@ utilities:
 utility-sources:
   wordmove:
     repo: https://github.com/welaika/vvv-wordmove.git
+    branch: master
 ```
 
 You can read more about VVV's utilities at https://varyingvagrantvagrants.org/docs/en-US/utilities/

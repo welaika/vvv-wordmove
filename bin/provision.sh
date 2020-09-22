@@ -1,34 +1,21 @@
 #!/bin/bash
 # VVV Install script
 
-# Rubygems update
-if [ $(gem -v|grep '^2.') ]; then
-	echo "gem installed"
+# Install ruby 2.7
+if [ $(command -v gem) ]; then
+    echo "gem installed"
 else
-	apt-get install -y ruby-dev
-	echo "ruby-dev installed"
-	echo "gem not installed"
-	gem install rubygems-update
-	update_rubygems
+    echo "ruby-dev & gem package installing..."
+    apt remove ruby* -y
+    snap install ruby --classic
+    gem install rubygems-update
 fi
 
-# wordmove install
-wordmove_install="$(gem list wordmove -i)"
-if [ "$wordmove_install" = true ]; then
-  echo "wordmove installed"
+# wordmove install/update
+if $(gem list wordmove -i); then
+    echo "updating wordmove"
+    noroot gem update wordmove
 else
-    echo "wordmove not installed"
-    gem install wordmove
-
-    wordmove_path="$(gem which wordmove | sed -s 's/.rb/\/deployer\/base.rb/')"
-    if [  "$(grep yaml $wordmove_path)" ]; then
-        echo "can require yaml"
-    else
-        echo "can't require yaml"
-        echo "set require yaml"
-
-        sed -i "7i require\ \'yaml\'" $wordmove_path
-
-        echo "can require yaml"
-    fi
+    echo "installing wordmove"
+    noroot gem install wordmove
 fi
