@@ -1,13 +1,13 @@
 #!/bin/bash
 # VVV Install script
 
-# Install ruby 2.7
+# Install ruby 3.0
 if [ $(command -v gem) ]; then
     echo "gem installed"
 else
     echo "ruby-dev & gem package installing..."
     apt remove ruby* -y
-    snap install ruby --classic
+    snap install ruby --classic --channel=3.0/stable
     gem install rubygems-update
 fi
 
